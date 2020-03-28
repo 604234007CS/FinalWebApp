@@ -1,25 +1,24 @@
 <?php
 require 'db.php';
 $message = '';
-if (isset($_POST['BookName']) && isset($_POST['Author']) && isset($_POST['Category']) && isset($_POST['Publisher'])
+if (isset($_POST['BookName']) && isset($_POST['AuthorID']) && isset($_POST['CategoryID']) && isset($_POST['PublisherID'])
 && isset($_POST['BookDescription']) && isset($_POST['BookPrice']) && isset($_POST['BookStatus']) 
 && isset($_POST['BookISBN']) && isset($_POST['BookNumPages'])){
     $BookName = $_POST['BookName'];
-    $AuthorName = $_POST['Author'];
-    $Category = $_POST['Category'];
-    $Publisher = $_POST['Publisher'];
+    $AuthorID = $_POST['AuthorID'];
+    $CategoryID = $_POST['CategoryID'];
+    $PublisherID = $_POST['PublisherID'];
     $BookDescription = $_POST['BookDescription']; 
     $BookPrice = $_POST['BookPrice']; 
     $BookISBN = $_POST['BookISBN']; 
     $BookStatus = $_POST['BookStatus'];
     $BookNumpages = $_POST['BookNumpages'];
-
-    $sql = "INSERT INTO books(BookName, Author, Category,Publisher, BookDescription, BookPrice, BookStatus, BookISBN, BookNumPages )
-    VALUES('$BookName', '$Author', '$Category',$Publisher, '$BookDescription', '$BookPrice', '$BookStatus' , '$BookISBN' , '$BookNumPages')";
+    $sql = "INSERT INTO books (BookName, AuthorID, CategoryID,PublisherID, BookDescription, BookPrice, BookStatus, BookISBN, BookNumPages )
+    VALUES('$BookName', '$AuthorID', '$CategoryID',$PublisherID, '$BookDescription', '$BookPrice', '$BookStatus' , '$BookISBN' , '$BookNumPages')";
     $statement = $connection->prepare($sql);
     if($statement->execute())   {
         $message = 'เพิ่มหนังสือสำเร็จ';
-        header("Location: /BookList.php");
+        header("Location BookList.php");
     }
 }
 ?>
@@ -46,7 +45,7 @@ if (isset($_POST['BookName']) && isset($_POST['Author']) && isset($_POST['Catego
         
           <div class="form-group"> 
             <label for="">ผู้เเต่ง</label>
-            <select name="Author" id="Author" class="form-control" 
+            <select name="AuthorID" id="AuthorID" class="form-control" 
             placeholder = 'ผู้เเต่ง' required >
                 <option value="1">Haruki Murakami</option>
                 <option value="2">Malcolm Gladwell</option>
@@ -59,7 +58,7 @@ if (isset($_POST['BookName']) && isset($_POST['Author']) && isset($_POST['Catego
 
         <div class="form-group"> 
             <label for="">ประเภทหนังสือ</label>
-            <select name="Category" id="Category" class="form-control" 
+            <select name="CategoryID" id="CategoryID" class="form-control" 
             placeholder = 'ประเภทหนังสือ' required >
                 <option value="1">นิยาย</option>
                 <option value="2">จิตวิทยา/พัฒนาตนเอง</option>
@@ -68,7 +67,7 @@ if (isset($_POST['BookName']) && isset($_POST['Author']) && isset($_POST['Catego
 
        <div class="form-group"> 
             <label for="">สำนักพิมพ์</label>
-            <select name="Publisher" id="Publisher" class="form-control" 
+            <select name="PublisherID" id="PublisherID" class="form-control" 
             placeholder = 'สำนักพิมพ์' required >
             <option value="1">สำนักพิมพ์กำมะหยี่</option>
             <option value="2">สำนักพิมพ์วีเลิร์น</option>
@@ -78,12 +77,13 @@ if (isset($_POST['BookName']) && isset($_POST['Author']) && isset($_POST['Catego
             </select></div>
           
         <div class="form-group">
-          <label for="">คำอธิบาย</label>
-          <input type="text" name="BookDescription" id="BookDescription" class="form-control" placeholder = 'กรอกคำอธิบาย' required ></div>   
-       
+            <label for="exampleFormControlTextarea1">คำอธิบาย</label>
+            <textarea rows="5" name="BookDescription" class="form-control"  placeholder = 'กรอกคำอธิบาย' required></textarea>
+        </div>
+
         <div class="form-group">
           <label for="">ราคา</label>
-          <input type="text" name="BookPrice" id="BookPrice" class="form-control" placeholder = 'ราคา' required ></div>
+          <input type="text" name="BookPrice" id="BookPrice" class="form-control" placeholder = 'ราคา THB' required ></div>
         
         <div class="form-group">
           <label for="">จำนวนหน้า</label>
@@ -91,7 +91,7 @@ if (isset($_POST['BookName']) && isset($_POST['Author']) && isset($_POST['Catego
         
           <div class="form-group">
           <label for="">ISBN</label>
-          <input type="text" name="BookISBN" id="BookISBN" class="form-control" placeholder = 'หมายเลข ISBN' required ></div>
+          <input type="text" name="BookISBN" id="BookISBN" class="form-control" placeholder = 'หมายเลข ISBN'pattern = "[0-9]{13}" title = "กรอกตัวเลขเท่านั้น" required ></div>
         
          <div class="form-check">
             <label for="">สถานะการขาย</label> &nbsp; &nbsp; &nbsp; 

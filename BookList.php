@@ -40,7 +40,7 @@ $books = $statement->fetchAll(PDO::FETCH_OBJ);
 
         <?php foreach($books as $book): ?>
           <tr>
-             <!-- สร้างชื่อให้เหมือนในฐานข้อมูล -->
+            
                     <td><?= $book->BookName; ?> </td> 
                     <td><?= $book->AuthorName; ?> </td>
                     <td><?= $book->CategoryName; ?> </td>

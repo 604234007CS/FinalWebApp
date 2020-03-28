@@ -87,9 +87,10 @@ if (isset($_POST['BookName']) && isset($_POST['AuthorName']) && isset($_POST['Ca
             </select></div>
           
         <div class="form-group">
-          <label for="">คำอธิบาย</label>
-          <input type="textarea" name="BookDescription" id="BookDescription" class="form-control" placeholder = 'กรอกคำอธิบาย' required ></div>   
-       
+            <label for="exampleFormControlTextarea1">คำอธิบาย</label>
+            <textarea rows="5" name="BookDescription" class="form-control"  placeholder = 'กรอกคำอธิบาย' required></textarea>
+        </div>
+        
         <div class="form-group">
           <label for="">ราคา</label>
           <input type="text" name="BookPrice" id="BookPrice" class="form-control" placeholder = 'ราคา' required ></div>
